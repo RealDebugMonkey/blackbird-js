@@ -24,7 +24,7 @@
 		filters: 'bbFilters',
 		controls: 'bbControls',
 		size: 'bbSize'
-	}
+	};
 	var messageTypes = { //order of these properties imply render order of filter controls
 		debug: true,
 		info: true,
@@ -99,7 +99,7 @@
 	}
 	
 	function clickControl( evt ) {
-		if ( !evt ) evt = window.event;
+		if ( !evt ) { evt = window.event; }
 		var el = ( evt.target ) ? evt.target : evt.srcElement;
 
 		if ( el.tagName == 'SPAN' ) {
@@ -112,7 +112,7 @@
 	}
 	
 	function clickFilter( evt ) { //show/hide a specific message type
-		if ( !evt ) evt = window.event;
+		if ( !evt ) { evt = window.event; }
 		var span = ( evt.target ) ? evt.target : evt.srcElement;
 
 		if ( span && span.tagName == 'SPAN' ) {
@@ -124,7 +124,7 @@
 
 				var active = 0;
 				for ( var entry in messageTypes ) {
-					if ( messageTypes[ entry ] ) active++;
+					if ( messageTypes[ entry ] ) { active++; }
 				}
 				var oneActiveFilter = ( active == 1 && messageTypes[ type ] );
 
@@ -153,7 +153,7 @@
 	}
 
 	function clickVis( evt ) {
-		if ( !evt ) evt = window.event;
+		if ( !evt ) { evt = window.event; }
 		var el = ( evt.target ) ? evt.target : evt.srcElement;
 
 		state.load = el.checked;
@@ -205,7 +205,7 @@
 			size = ( state && state.size == null ) ? 0 : ( state.size + 1 ) % 2;
 	  	}
 
-		classes[ 1 ] = ( size === 0 ) ? 'bbSmall' : 'bbLarge'
+		classes[ 1 ] = ( size === 0 ) ? 'bbSmall' : 'bbLarge';
 
 		var span = document.getElementById( IDs.size );
 		span.title = ( size === 1 ) ? 'small' : 'large';
@@ -250,8 +250,8 @@
 					
 			var visible = isVisible();
 					
-			if ( visible && evt.shiftKey && evt.altKey ) clear();
-			else if	 (visible && evt.shiftKey ) reposition();
+			if ( visible && evt.shiftKey && evt.altKey ) { clear(); }
+			else if	 (visible && evt.shiftKey ) { reposition(); }
 			else if ( !evt.shiftKey && !evt.altKey ) {
 			  ( visible ) ? hide() : show();
 			}
@@ -265,14 +265,14 @@
 			obj[ 'e' + type + fn ] = fn;
 			obj[ type + fn ] = function(){ obj[ 'e' + type + fn ]( window.event ) };
 			obj.attachEvent( 'on' + type, obj[ type + fn ] );
-		} else obj.addEventListener( type, fn, false );
+		} else { obj.addEventListener( type, fn, false ); }
 	}
 	function removeEvent( obj, type, fn ) {
 		var obj = ( obj.constructor === String ) ? document.getElementById( obj ) : obj;
 		if ( obj.detachEvent ) {
 			obj.detachEvent( 'on' + type, obj[ type + fn ] );
 			obj[ type + fn ] = null;
-	  } else obj.removeEventListener( type, fn, false );
+	  	} else { obj.removeEventListener( type, fn, false ); }
 	}
 
 	window[ NAMESPACE ] = {
@@ -309,10 +309,13 @@
 				}
 				return currentTime;
 			}
-	}
+	};
         if(document.body)
+        {
           init();
+        }
         else 
+        {
 	  addEvent( window, 'load', init );
 		/* initialize Blackbird when the page loads */
 		function init() {
@@ -340,7 +343,7 @@
 			window[ NAMESPACE ].init = function() {
 				show();
 				window[ NAMESPACE ].error( [ '<b>', NAMESPACE, '</b> can only be initialized once' ] );
-			}
+			};
 
 			addEvent( window, 'unload', function() {
 				removeEvent( IDs.checkbox, 'click', clickVis );
@@ -349,4 +352,5 @@
 				removeEvent( document, 'keyup', readKey );
 			});
 		}
+        }
 })();
